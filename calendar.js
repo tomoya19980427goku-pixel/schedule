@@ -1,89 +1,94 @@
 // ==========================================
-// Zoomスケジュール Ver1.0
-// Part1
+// Zoomスケジュールカレンダー
+// Version 2.0
 // ==========================================
 
-// カレンダー本体
 const calendarBody = document.getElementById("calendarBody");
 const monthTitle = document.getElementById("monthTitle");
 
-// 今日・次回・今週
-const todayEventBox = document.getElementById("todayEvent");
-const nextEventBox = document.getElementById("nextEvent");
-const weekEventsBox = document.getElementById("weekEvents");
-
-// 年月
+// 年・月
 monthTitle.textContent = `${year}年${month}月`;
 
-const today = new Date();
-
-// 月初・月末
+// 月初
 const firstDay = new Date(year, month - 1, 1);
+
+// 月末
 const lastDay = new Date(year, month, 0);
 
-// 月曜始まり
+// 月初の曜日
 let startDay = firstDay.getDay();
+
+// 日曜始まり→月曜始まりへ変換
 startDay = startDay === 0 ? 6 : startDay - 1;
 
-// 日数
+// 月の日数
 const totalDays = lastDay.getDate();
 
-// 初期化
+// 今日
+const today = new Date();
+
+// カレンダーを空にする
 calendarBody.innerHTML = "";
-
-// 曜日
-const weeks = ["月","火","水","木","金","土","日"];
-
 // ==========================================
-// 空白セル
+// 空白セル（月初まで）
 // ==========================================
 
-for(let i=0;i<startDay;i++){
+for (let i = 0; i < startDay; i++) {
 
-    const empty=document.createElement("div");
+    const empty = document.createElement("div");
 
-    empty.className="day empty";
+    empty.className = "day empty";
 
     calendarBody.appendChild(empty);
 
 }
 
 // ==========================================
-// 日付作成
+// 日付セル作成
 // ==========================================
 
-for(let day=1;day<=totalDays;day++){
+for (let day = 1; day <= totalDays; day++) {
 
-    const cell=document.createElement("div");
+    const cell = document.createElement("div");
 
-    cell.className="day";
+    cell.className = "day";
 
-    if(
-        today.getFullYear()===year &&
-        today.getMonth()+1===month &&
-        today.getDate()===day
-    ){
+    // 今日なら黄色
+    if (
+        today.getFullYear() === year &&
+        today.getMonth() + 1 === month &&
+        today.getDate() === day
+    ) {
         cell.classList.add("today");
     }
 
-    const number=document.createElement("div");
+    // 日付
+    const number = document.createElement("div");
 
-    number.className="day-number";
+    number.className = "day-number";
 
-    const weekIndex=(startDay+day-1)%7;
+    const weeks = ["月","火","水","木","金","土","日"];
 
-    number.innerHTML=`
-        ${day}
-        <div style="font-size:12px;margin-top:3px;">
-            (${weeks[weekIndex]})
-        </div>
-    `;
+const weekIndex = (startDay + day - 1) % 7;
+
+number.innerHTML = `
+${day}
+<div style="
+font-size:12px;
+font-weight:normal;
+margin-top:3px;
+">
+(${weeks[weekIndex]})
+</div>
+`;
 
     cell.appendChild(number);
 
+    // イベント表示は後で追加
     calendarBody.appendChild(cell);
 
-}// ==========================================
+}
+// ==========================================
 // イベント表示
 // ==========================================
 
@@ -91,6 +96,7 @@ const cells = document.querySelectorAll(".day");
 
 events.forEach(event => {
 
+    // 月初の空白セルがあるので位置を調整
     const cell = cells[event.date + startDay - 1];
 
     if (!cell) return;
@@ -99,17 +105,14 @@ events.forEach(event => {
 
     link.className = "event";
 
-    if (event.url !== "") {
+    link.href = event.url || "#";
 
-        link.href = event.url;
-        link.target = "_blank";
-
-    }
+    link.target = "_blank";
 
     link.style.background = event.color;
 
     link.innerHTML = `
-        <div style="font-size:12px;">
+        <div style="font-size:12px;opacity:.9;">
             🕒 ${event.time}
         </div>
 
@@ -118,15 +121,24 @@ events.forEach(event => {
         </div>
     `;
 
-    if(event.url===""){
+    if (event.url === "") {
 
-        link.style.opacity=".7";
+        link.removeAttribute("href");
 
-        link.innerHTML+=`
-            <div style="
-                margin-top:6px;
-                font-size:11px;
-            ">
+        link.style.cursor = "default";
+
+        link.style.opacity = ".6";
+
+        link.innerHTML = `
+            <div style="font-size:12px;opacity:.9;">
+                🕒 ${event.time}
+            </div>
+
+            <div style="margin-top:6px;">
+                ${event.title}
+            </div>
+
+            <div style="margin-top:6px;font-size:11px;">
                 🔒 URL準備中
             </div>
         `;
@@ -137,195 +149,218 @@ events.forEach(event => {
 
 });
 
-// ==========================================
-// 土日色変更
-// ==========================================
+    link.innerHTML = `
+    <div style="font-size:12px;opacity:.9;">
+        🕒 ${event.time}
+    </div>
 
-document.querySelectorAll(".day").forEach((cell,index)=>{
+    <div style="margin-top:6px;">
+        ${event.title}
+    </div>
+    `;
 
-    if(cell.classList.contains("empty")) return;
+    if (event.url === "") {
 
-    const week=index%7;
+        link.removeAttribute("href");
 
-    const number=cell.querySelector(".day-number");
+        link.style.cursor = "default";
 
-    if(!number) return;
+        link.style.opacity = ".6";
 
-    if(week===5){
+        link.innerHTML = `
+    <div style="font-size:12px;opacity:.9;">
+        🕒 ${event.time}
+    </div>
 
-        number.style.color="#2563eb";
+    <div style="margin-top:6px;">
+        ${event.title}
+    </div>
+
+    <div style="margin-top:6px;font-size:11px;">
+        🔒 URL準備中
+    </div>
+`;
 
     }
 
-    if(week===6){
+    cell.appendChild(link);
 
-        number.style.color="#dc2626";
+// ==========================================
+// 土日の日付の色変更
+// ==========================================
 
+const allDays = document.querySelectorAll(".day");
+
+allDays.forEach((cell, index) => {
+
+    // 空白セルは除く
+    if (cell.classList.contains("empty")) return;
+
+    // 曜日（月曜始まり）
+    const week = index % 7;
+
+    const number = cell.querySelector(".day-number");
+
+    if (!number) return;
+
+    // 土曜日
+    if (week === 5) {
+        number.style.color = "#2563eb";
+    }
+
+    // 日曜日
+    if (week === 6) {
+        number.style.color = "#dc2626";
     }
 
 });
 
 // ==========================================
-// 今日までスクロール
+// イベントが無い日は少し薄く表示
 // ==========================================
 
-const todayCell=document.querySelector(".today");
+allDays.forEach(cell => {
 
-if(todayCell){
+    if (cell.classList.contains("empty")) return;
 
-    setTimeout(()=>{
+    const event = cell.querySelector(".event");
 
-        todayCell.scrollIntoView({
+    if (!event) {
+        cell.style.background = "#fafafa";
+    }
 
-            behavior:"smooth",
+});
 
-            block:"center"
-
-        });
-
-    },300);
-
-}// ==========================================
-// 今日のZoom
 // ==========================================
+// URLがあるイベントだけクリック可能
+// ==========================================
+
+document.querySelectorAll(".event").forEach(event => {
+
+    if (event.getAttribute("href") === "#") {
+
+        event.removeAttribute("href");
+        event.style.cursor = "default";
+        event.style.opacity = ".6";
+
+    }
+
+});
+// ==========================================
+// 今日のZoomを表示
+// ==========================================
+
+const todayEventBox = document.getElementById("todayEvent");
 
 const todayEvents = events.filter(event => {
 
     return (
-        event.date === today.getDate()
-    );
+    event.month === month &&
+    event.date === today.getDate()
+);
 
 });
 
-if(todayEventBox){
+if (todayEvents.length === 0) {
 
-    if(todayEvents.length===0){
+    todayEventBox.innerHTML = "本日の予定はありません";
 
-        todayEventBox.innerHTML="本日の予定はありません";
+} else {
 
-    }else{
+    todayEventBox.innerHTML = "";
 
-        todayEventBox.innerHTML="";
+    todayEvents.forEach(event => {
+       if (event.month !== month) return;
+        const item = document.createElement("div");
 
-        todayEvents.forEach(event=>{
+        item.style.marginBottom = "15px";
 
-            const card=document.createElement("div");
+        if (event.url) {
 
-            card.className="week-item";
+            item.innerHTML = `
+                <strong>${event.title}</strong><br>
+                ${event.time}<br><br>
 
-            if(event.url){
+                <a href="${event.url}"
+                   target="_blank"
+                   class="event"
+                   style="display:inline-block;background:${event.color};">
+                   Zoomに参加
+                </a>
+            `;
 
-                card.innerHTML=`
-                    <div class="week-title">
-                        ${event.title}
-                    </div>
+        } else {
 
-                    <div class="week-time">
-                        🕒 ${event.time}
-                    </div>
+            item.innerHTML = `
+                <strong>${event.title}</strong><br>
+                ${event.time}<br><br>
 
-                    <br>
-
-                    <a
-                        class="event"
-                        href="${event.url}"
-                        target="_blank"
-                        style="background:${event.color};display:inline-block;"
-                    >
-                        Zoomに参加
-                    </a>
-                `;
-
-            }else{
-
-                card.innerHTML=`
-                    <div class="week-title">
-                        ${event.title}
-                    </div>
-
-                    <div class="week-time">
-                        🕒 ${event.time}
-                    </div>
-
-                    <br>
-
-                    <span class="event"
-                    style="
-                    background:#999;
+                <span style="
                     display:inline-block;
-                    cursor:default;
-                    ">
+                    padding:8px 14px;
+                    background:#999;
+                    color:white;
+                    border-radius:8px;
+                ">
                     URL準備中
-                    </span>
-                `;
+                </span>
+            `;
 
-            }
+        }
 
-            todayEventBox.appendChild(card);
+        todayEventBox.appendChild(item);
+
+    });
+
+}
+// ==========================================
+// 今日までスクロール
+// ==========================================
+
+const todayCell = document.querySelector(".today");
+
+if (todayCell) {
+
+    setTimeout(() => {
+
+        todayCell.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
 
         });
 
-    }
+    }, 300);
 
 }
-
 // ==========================================
-// 次回のZoom
-// ==========================================
-
-if(nextEventBox){
-
-    const nextEvent=events.find(event=>event.date>today.getDate());
-
-    if(nextEvent){
-
-        nextEventBox.innerHTML=`
-
-            <div class="week-item">
-
-                <div class="week-date">
-                    ${nextEvent.date}日
-                </div>
-
-                <div class="week-title">
-                    ${nextEvent.title}
-                </div>
-
-                <div class="week-time">
-                    🕒 ${nextEvent.time}
-                </div>
-
-            </div>
-
-        `;
-
-    }else{
-
-        nextEventBox.innerHTML="次回の予定はありません";
-
-    }
-
-}
-
-// ==========================================
-// 今週の予定
+// 今週の予定を表示
 // ==========================================
 
-if(weekEventsBox){
+const weekEvents = document.getElementById("weekEvents");
 
-    weekEventsBox.innerHTML="";
+if (weekEvents) {
 
-    events
-        .filter(event=>event.date>=today.getDate())
-        .slice(0,5)
-        .forEach(event=>{
+    weekEvents.innerHTML = "";
 
-            const card=document.createElement("div");
+    const currentDay = today.getDate();
 
-            card.className="week-item";
+    const upcomingEvents = events.filter(event => event.date >= currentDay);
 
-            card.innerHTML=`
+    if (upcomingEvents.length === 0) {
 
+        weekEvents.innerHTML = "<p>今週の予定はありません。</p>";
+
+    } else {
+
+        upcomingEvents.slice(0, 5).forEach(event => {
+
+            const item = document.createElement("div");
+
+            item.className = "week-item";
+
+            item.innerHTML = `
                 <div class="week-date">
                     ${event.date}日
                 </div>
@@ -337,11 +372,12 @@ if(weekEventsBox){
                 <div class="week-time">
                     🕒 ${event.time}
                 </div>
-
             `;
 
-            weekEventsBox.appendChild(card);
+            weekEvents.appendChild(item);
 
         });
+
+    }
 
 }
