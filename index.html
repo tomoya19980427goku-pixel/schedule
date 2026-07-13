@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Zoomスケジュール</title>
 
     <link rel="stylesheet" href="style.css">
@@ -12,13 +14,33 @@
 
     <header>
         <h1>📅 Zoomスケジュール</h1>
-        <p>イベントをクリックするとZoomへ参加できます。</p>
+
+        <div id="monthTitle">
+            2026年7月
+        </div>
     </header>
 
-    <main id="calendar"></main>
+    <main>
+
+        <div class="calendar">
+
+            <div class="week monday">月</div>
+            <div class="week">火</div>
+            <div class="week">水</div>
+            <div class="week">木</div>
+            <div class="week">金</div>
+            <div class="week saturday">土</div>
+            <div class="week sunday">日</div>
+
+            <div id="calendarBody"></div>
+
+        </div>
+
+    </main>
 
     <script src="events.js"></script>
-    <script src="script.js"></script>
+    <script src="calendar.js"></script>
 
 </body>
+
 </html>
