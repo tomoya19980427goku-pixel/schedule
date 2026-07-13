@@ -183,3 +183,71 @@ document.querySelectorAll(".event").forEach(event => {
     }
 
 });
+// ==========================================
+// 今日のZoomを表示
+// ==========================================
+
+const todayEventBox = document.getElementById("todayEvent");
+
+const todayEvents = events.filter(event => {
+
+    return (
+        today.getFullYear() === year &&
+        today.getMonth() + 1 === month &&
+        today.getDate() === event.date
+    );
+
+});
+
+if (todayEvents.length === 0) {
+
+    todayEventBox.innerHTML = "本日の予定はありません";
+
+} else {
+
+    todayEventBox.innerHTML = "";
+
+    todayEvents.forEach(event => {
+
+        const item = document.createElement("div");
+
+        item.style.marginBottom = "15px";
+
+        if (event.url) {
+
+            item.innerHTML = `
+                <strong>${event.title}</strong><br>
+                ${event.time}<br><br>
+
+                <a href="${event.url}"
+                   target="_blank"
+                   class="event"
+                   style="display:inline-block;background:${event.color};">
+                   Zoomに参加
+                </a>
+            `;
+
+        } else {
+
+            item.innerHTML = `
+                <strong>${event.title}</strong><br>
+                ${event.time}<br><br>
+
+                <span style="
+                    display:inline-block;
+                    padding:8px 14px;
+                    background:#999;
+                    color:white;
+                    border-radius:8px;
+                ">
+                    URL準備中
+                </span>
+            `;
+
+        }
+
+        todayEventBox.appendChild(item);
+
+    });
+
+}

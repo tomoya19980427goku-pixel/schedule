@@ -143,3 +143,38 @@ main{
     }
 
 }
+/* 今日のZoom */
+
+#todayBox{
+
+    max-width:1200px;
+
+    margin:20px auto;
+
+    padding:20px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+}
+
+#todayBox h2{
+
+    margin-bottom:15px;
+
+    color:#e74c3c;
+
+    font-size:24px;
+
+}
+
+#todayEvent{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
