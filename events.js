@@ -1,8 +1,18 @@
-const year = 2026;
-const month = 7;
+// 今日の日付を取得
+const today = new Date();
 
-const events = [
+// 表示する年・月
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+
+// =======================
+// 2026年7月
+// =======================
+
+const julyEvents = [
+
     {
+        month:7,
         date:11,
         time:"18:00",
         title:"💃 ワンコインダンス",
@@ -11,6 +21,7 @@ const events = [
     },
 
     {
+        month:7,
         date:12,
         time:"13:00",
         title:"💻 ミナソンクラブ",
@@ -19,6 +30,7 @@ const events = [
     },
 
     {
+        month:7,
         date:13,
         time:"12:00",
         title:"📻 FMなまず",
@@ -27,6 +39,7 @@ const events = [
     },
 
     {
+        month:7,
         date:15,
         time:"13:00",
         title:"🍒 平日チェリーライブ",
@@ -35,6 +48,7 @@ const events = [
     },
 
     {
+        month:7,
         date:20,
         time:"12:00",
         title:"📻 FMなまず",
@@ -43,6 +57,7 @@ const events = [
     },
 
     {
+        month:7,
         date:24,
         time:"13:00",
         title:"💻 佐賀オンラインセミナー",
@@ -51,6 +66,7 @@ const events = [
     },
 
     {
+        month:7,
         date:26,
         time:"13:00",
         title:"🍒 休日チェリーライブ",
@@ -59,6 +75,7 @@ const events = [
     },
 
     {
+        month:7,
         date:27,
         time:"19:00",
         title:"📻 ナイトFMなまず",
@@ -67,6 +84,7 @@ const events = [
     },
 
     {
+        month:7,
         date:28,
         time:"19:00",
         title:"💻 竹の子族",
@@ -75,6 +93,7 @@ const events = [
     },
 
     {
+        month:7,
         date:29,
         time:"13:00",
         title:"🌸 サクラ咲く会",
@@ -83,6 +102,7 @@ const events = [
     },
 
     {
+        month:7,
         date:29,
         time:"20:00",
         title:"🧘 ヨガチャンネル",
@@ -91,10 +111,191 @@ const events = [
     },
 
     {
+        month:7,
         date:31,
         time:"19:00",
         title:"🧪 理科の実験チャンネル",
         url:"",
         color:"#16a085"
     }
+
+];
+
+// =======================
+// 2026年8月
+// =======================
+
+const augustEvents = [
+
+    {
+        month:8,
+        date:1,
+        time:"11:00",
+        title:"💻 寺子屋チャンネル",
+        url:"",
+        color:"#3498db"
+    },
+
+    {
+        month:8,
+        date:3,
+        time:"13:00",
+        title:"💻 のびしろの会",
+        url:"",
+        color:"#3498db"
+    },
+
+    {
+        month:8,
+        date:3,
+        time:"19:00",
+        title:"📻 ナイトFM",
+        url:"",
+        color:"#f39c12"
+    },
+
+    {
+        month:8,
+        date:4,
+        time:"19:00",
+        title:"💻 竹の子族",
+        url:"",
+        color:"#3498db"
+    },
+
+    {
+        month:8,
+        date:9,
+        time:"13:00",
+        title:"🌸 サクラ咲く会",
+        url:"",
+        color:"#ff69b4"
+    },
+
+    {
+        month:8,
+        date:10,
+        time:"12:00",
+        title:"📻 FMなまず",
+        url:"",
+        color:"#f39c12"
+    },
+
+    {
+        month:8,
+        date:12,
+        time:"13:00",
+        title:"🍒 チェリーライブ",
+        url:"",
+        color:"#e74c3c"
+    },
+
+    {
+        month:8,
+        date:15,
+        time:"13:00",
+        title:"💃 ワンコインダンス",
+        url:"",
+        color:"#9b59b6"
+    },
+
+    {
+        month:8,
+        date:16,
+        time:"13:00",
+        title:"💻 ミナソンチャンネル",
+        url:"",
+        color:"#3498db"
+    },
+
+    {
+        month:8,
+        date:17,
+        time:"12:00",
+        title:"📻 FMなまず",
+        url:"",
+        color:"#f39c12"
+    },
+
+    {
+        month:8,
+        date:17,
+        time:"20:00",
+        title:"🤸 アスカストレッチ",
+        url:"",
+        color:"#f1c40f"
+    },
+
+    {
+        month:8,
+        date:21,
+        time:"13:00",
+        title:"💻 佐賀オンラインセミナー",
+        url:"",
+        color:"#3498db"
+    },
+
+    {
+        month:8,
+        date:24,
+        time:"13:00",
+        title:"🍒 チェリーライブ",
+        url:"",
+        color:"#e74c3c"
+    },
+
+    {
+        month:8,
+        date:25,
+        time:"19:00",
+        title:"💻 竹の子族",
+        url:"",
+        color:"#3498db"
+    },
+
+    {
+        month:8,
+        date:26,
+        time:"13:00",
+        title:"🌸 サクラ咲く会",
+        url:"",
+        color:"#ff69b4"
+    },
+
+    {
+        month:8,
+        date:26,
+        time:"20:00",
+        title:"🧘 ヨガチャンネル",
+        url:"",
+        color:"#27ae60"
+    },
+
+    {
+        month:8,
+        date:30,
+        time:"13:00",
+        title:"📻 FMなまず",
+        url:"",
+        color:"#f39c12"
+    },
+
+    {
+        month:8,
+        date:31,
+        time:"19:00",
+        title:"🧪 理科の実験チャンネル",
+        url:"",
+        color:"#16a085"
+    }
+
+];
+
+// =======================
+// 全イベント
+// =======================
+
+const events = [
+    ...julyEvents,
+    ...augustEvents
 ];
