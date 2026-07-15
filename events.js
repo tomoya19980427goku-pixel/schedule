@@ -1,9 +1,13 @@
-// 今日の日付を取得
+// 今日の日付
 const today = new Date();
 
-// 表示する年・月
-const year = today.getFullYear();
-const month = today.getMonth() + 1;
+// 現在の年月
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth() + 1;
+
+// 表示する年月
+let year = currentYear;
+let month = currentMonth;
 
 // =======================
 // 2026年7月

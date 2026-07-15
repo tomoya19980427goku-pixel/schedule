@@ -96,6 +96,9 @@ const cells = document.querySelectorAll(".day");
 
 events.forEach(event => {
 
+    // 今表示している月以外は表示しない
+    if (event.month !== month) return;
+
     // 月初の空白セルがあるので位置を調整
     const cell = cells[event.date + startDay - 1];
 
@@ -310,8 +313,12 @@ if (weekEvents) {
 
     const currentDay = today.getDate();
 
-    const upcomingEvents = events.filter(event => event.date >= currentDay);
+    const upcomingEvents = events.filter(event =>
 
+    event.month === month &&
+    event.date >= currentDay
+
+);
     if (upcomingEvents.length === 0) {
 
         weekEvents.innerHTML = "<p>今週の予定はありません。</p>";
