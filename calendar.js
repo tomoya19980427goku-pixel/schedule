@@ -24,9 +24,6 @@ startDay = startDay === 0 ? 6 : startDay - 1;
 // 月の日数
 const totalDays = lastDay.getDate();
 
-// 今日
-const today = new Date();
-
 // カレンダーを空にする
 calendarBody.innerHTML = "";
 // ==========================================
