@@ -1,130 +1,115 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>📅 Zoomスケジュール</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+<title>ERINA Zoomスケジュール</title>
 
-<meta name="theme-color" content="#2563eb">
+<link rel="stylesheet" href="style.css">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
 
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ff69b4">
 
-<meta name="apple-mobile-web-app-title" content="ERINA Zoom">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
 </head>
 
 <body>
 
-    <!-- ヘッダー -->
-    <header>
+<header>
+    <h1>📅 ERINA Zoomスケジュール</h1>
+</header>
 
-        <h1>📅 Zoomスケジュール</h1>
-
-        <div id="monthTitle">
-            2026年7月
-        </div>
-
-    </header>
+<main>
 
     <!-- 今日のZoom -->
-    <section id="todayBox">
-
+    <section class="card">
         <h2>📢 今日のZoom</h2>
-
-        <div id="todayEvent">
-            本日の予定はありません
+        <div id="todayEvents">
+            読み込み中...
         </div>
-
     </section>
 
-    <!-- 次回のZoom -->
-    <section id="nextBox">
-
+    <!-- 次回Zoom -->
+    <section class="card">
         <h2>⏭ 次回のZoom</h2>
-
         <div id="nextEvent">
-            次回の予定はありません
+            読み込み中...
         </div>
-
     </section>
 
     <!-- 今週の予定 -->
-    <section id="weekBox">
-
-        <h2>📅 今週の予定</h2>
-
+    <section class="card">
+        <h2>🗓 今週の予定</h2>
         <div id="weekEvents">
-            今週の予定はありません
+            読み込み中...
         </div>
-
-    </section>
-
-    <!-- お知らせ -->
-    <section id="noticeBox">
-
-        <h2>📢 お知らせ</h2>
-
-        <div id="notice">
-
-            現在お知らせはありません。
-
-        </div>
-
     </section>
 
     <!-- カレンダー -->
-    <main>
+    <section class="card">
 
-        <div class="calendar">
+        <div class="calendar-header">
 
-            <div class="week monday">月</div>
-            <div class="week">火</div>
-            <div class="week">水</div>
-            <div class="week">木</div>
-            <div class="week">金</div>
-            <div class="week saturday">土</div>
-            <div class="week sunday">日</div>
+            <button id="prevMonth">◀</button>
 
-            <div id="calendarBody"></div>
+            <h2 id="monthTitle"></h2>
+
+            <button id="nextMonth">▶</button>
 
         </div>
 
-    </main>
+        <table class="calendar">
 
-    <script src="events.js"></script>
-    <script src="calendar.js"></script>
-    <script>
+            <thead>
+                <tr>
+                    <th>月</th>
+                    <th>火</th>
+                    <th>水</th>
+                    <th>木</th>
+                    <th>金</th>
+                    <th>土</th>
+                    <th>日</th>
+                </tr>
+            </thead>
 
+            <tbody id="calendarBody">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- 選択日の予定 -->
+    <section class="card">
+        <h2>📌 この日の予定</h2>
+
+        <div id="selectedDate">
+            日付を押すと予定が表示されます。
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>ERINA Zoom Schedule Ver.3.0</p>
+
+</footer>
+
+<script src="events.js"></script>
+<script src="app.js"></script>
+
+<script>
 if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", () => {
-
-        navigator.serviceWorker.register("./service-worker.js")
-
-            .then(() => {
-
-                console.log("Service Worker 登録完了");
-
-            })
-
-            .catch(error => {
-
-                console.log("Service Worker エラー", error);
-
-            });
-
-    });
-
+    navigator.serviceWorker.register("./service-worker.js");
 }
-
 </script>
 
 </body>
-
 </html>
