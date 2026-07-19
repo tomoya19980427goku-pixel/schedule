@@ -43,7 +43,7 @@
 
     <!-- 今週の予定 -->
     <section class="card">
-        <h2>🗓 今週の予定</h2>
+        <h2>📅 近日の予定</h2>
         <div id="weekEvents">
             読み込み中...
         </div>
@@ -102,6 +102,32 @@
 
 </footer>
 
+<!-- =========================
+     イベント詳細ポップアップ
+========================= -->
+
+<div id="eventModal" class="modal">
+
+    <div class="modal-content">
+
+        <span id="closeModal" class="close">&times;</span>
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+<!-- =========================
+     画像拡大用
+========================= -->
+
+<div id="imageModal" class="modal">
+
+    <span id="closeImageModal" class="close">&times;</span>
+
+    <img id="modalImage" class="modal-image">
+
+</div>
 <script src="events.js"></script>
 <script src="app.js"></script>
 

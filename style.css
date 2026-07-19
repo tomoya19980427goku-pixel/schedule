@@ -200,3 +200,126 @@ header{
     overflow:hidden;
     text-overflow:ellipsis;
 }
+/* ===========================
+   ポップアップ
+=========================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.5);
+
+    z-index:9999;
+
+}
+
+.modal-content{
+
+    background:#fff;
+
+    width:90%;
+    max-width:700px;
+
+    margin:40px auto;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    position:relative;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+}
+
+.close{
+
+    position:absolute;
+
+    right:20px;
+
+    top:10px;
+
+    font-size:35px;
+
+    cursor:pointer;
+
+    color:#888;
+
+}
+
+.close:hover{
+
+    color:#ff4f9a;
+
+}
+
+.modal-content img{
+
+    width:100%;
+
+    border-radius:10px;
+
+    margin:15px 0;
+
+}
+
+.modal-title{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#ff4f9a;
+
+    margin-bottom:15px;
+
+}
+
+.modal-time{
+
+    font-size:18px;
+
+    margin-bottom:15px;
+
+}
+/* ===========================
+   画像拡大
+=========================== */
+
+.modal-image{
+
+    display:block;
+
+    max-width:90%;
+
+    max-height:90vh;
+
+    margin:40px auto;
+
+    border-radius:10px;
+
+}
+
+#imageModal{
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+}

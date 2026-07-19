@@ -16,10 +16,14 @@ const todayEvents = document.getElementById("todayEvents");
 const nextEvent = document.getElementById("nextEvent");
 const weekEvents = document.getElementById("weekEvents");
 const selectedDate = document.getElementById("selectedDate");
-
+const eventModal = document.getElementById("eventModal");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
 const monthTitle = document.getElementById("monthTitle");
 const calendarBody = document.getElementById("calendarBody");
-
+const imageModal = document.getElementById("imageModal");
+const modalImage = document.getElementById("modalImage");
+const closeImageModal = document.getElementById("closeImageModal");
 const prevMonth = document.getElementById("prevMonth");
 const nextMonth = document.getElementById("nextMonth");
 
@@ -325,7 +329,7 @@ function loadWeekEvents(){
 
 function showEvents(day){
 
-    const list=events.filter(e=>
+    const list = events.filter(e=>
 
         e.year===currentYear &&
         e.month===currentMonth &&
@@ -335,56 +339,80 @@ function showEvents(day){
 
     if(list.length===0){
 
-        selectedDate.innerHTML=`
-        <p>${currentMonth}月${day}日の予定はありません。</p>
+        modalBody.innerHTML=`
+        <h2>${currentMonth}月${day}日</h2>
+        <p>予定はありません。</p>
         `;
+
+        eventModal.style.display="block";
 
         return;
 
     }
 
-    let html=`<h3>${currentMonth}月${day}日の予定</h3>`;
+    let html="";
 
     list.forEach(e=>{
 
         html+=`
-        <div style="margin:15px 0;padding:10px;border-left:5px solid ${e.color};background:#fafafa;">
-            <strong>${e.time}</strong><br>
-            ${e.title}<br>
+
+        <div>
+
+            <div class="modal-title">${e.title}</div>
+
+            <div class="modal-time">
+                🕛 ${e.time}${e.endTime ? " ～ " + e.endTime : ""}
+            </div>
+
         `;
+
+       if(e.image){
+
+    html+=`
+
+    <img
+        src="${e.image}"
+        alt="${e.title}"
+        class="event-image"
+        onclick="openImage('${e.image}')">
+
+    `;
+
+}
 
         if(e.url){
 
             html+=`
+
             <a
                 class="zoom-button"
                 href="${e.url}"
-                target="_blank"
-            >
+                target="_blank">
+
                 Zoomに参加する
+
             </a>
-            `;
 
-        }else{
-
-            html+=`
-            <p style="color:#888;">
-                Zoom URL準備中
-            </p>
             `;
 
         }
 
-        html+=`</div>`;
+        html+=`
+
+        </div>
+
+        `;
 
     });
 
-    selectedDate.innerHTML=html;
+    modalBody.innerHTML=html;
+
+    eventModal.style.display="block";
 
 }
 
 // ==============================
-// 前月・次月ボタン
+// 前月ボタン
 // ==============================
 
 prevMonth.addEventListener("click",()=>{
@@ -402,6 +430,10 @@ prevMonth.addEventListener("click",()=>{
 
 });
 
+// ==============================
+// 次月ボタン
+// ==============================
+
 nextMonth.addEventListener("click",()=>{
 
     currentMonth++;
@@ -416,6 +448,26 @@ nextMonth.addEventListener("click",()=>{
     renderCalendar();
 
 });
+
+// ==============================
+// ポップアップを閉じる
+// ==============================
+
+closeModal.onclick = function(){
+
+    eventModal.style.display = "none";
+
+};
+
+window.onclick = function(event){
+
+    if(event.target === eventModal){
+
+        eventModal.style.display = "none";
+
+    }
+
+};
 // ==============================
 // 初期表示
 // ==============================
@@ -424,3 +476,30 @@ loadTodayEvents();
 loadNextEvent();
 loadWeekEvents();
 renderCalendar();
+// ==============================
+// 画像拡大
+// ==============================
+
+function openImage(src){
+
+    modalImage.src = src;
+
+    imageModal.style.display = "flex";
+
+}
+
+closeImageModal.onclick = function(){
+
+    imageModal.style.display = "none";
+
+};
+
+imageModal.onclick = function(e){
+
+    if(e.target === imageModal){
+
+        imageModal.style.display = "none";
+
+    }
+
+};
