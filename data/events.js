@@ -37,18 +37,5 @@ const events = [
     "url": "https://us06web.zoom.us/j/81508872311?pwd=i01nYlbwEYec6hF2w1loy4yK0fgjCl.1",
     "color": "#e74c3c",
     "category": "cherry"
-  },
-  {
-    "year": 2026,
-    "month": 7,
-    "date": 31,
-    "time": "12:00",
-    "endTime": "14:00",
-    "title": "テストイベント",
-    "shortTitle": "テスト",
-    "image": "",
-    "url": "",
-    "color": "#ff69b4",
-    "category": ""
   }
 ];
