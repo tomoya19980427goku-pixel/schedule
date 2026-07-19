@@ -3,14 +3,14 @@ const events = [
     "year": 2026,
     "month": 7,
     "date": 20,
-    "time": "12:30",
-    "endTime": "13:30",
+    "time": "12:00",
     "title": "📻 FMなまず",
     "shortTitle": "📻FM",
     "image": "images/fm314.jpg",
     "url": "https://us06web.zoom.us/j/86184643416?pwd=HRDbK9qJDsIMsXNbUQh2TypatFajN5.1",
     "color": "#f39c12",
-    "category": "fm"
+    "category": "fm",
+    "endTime": "13:30"
   },
   {
     "year": 2026,
@@ -37,5 +37,18 @@ const events = [
     "color": "#e74c3c",
     "category": "cherry",
     "endTime": "14:30"
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "date": 31,
+    "time": "12;30",
+    "endTime": "14;30",
+    "title": "テストタイトル",
+    "shortTitle": "テスト",
+    "image": "",
+    "url": "",
+    "color": "#ff69b4",
+    "category": ""
   }
 ];
