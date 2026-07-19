@@ -273,50 +273,47 @@ if (dayEvents.length > 2) {
 }
 
 // ==============================
-// 今週の予定
+// 近日の予定（今日から7日間）
 // ==============================
 
 function loadWeekEvents(){
 
     const now = new Date();
+    now.setHours(0,0,0,0);
 
-    // 今週の月曜日
-    const start = new Date(now);
-    const day = start.getDay();
-    const diff = (day === 0) ? -6 : 1 - day;
-    start.setDate(start.getDate() + diff);
-    start.setHours(0,0,0,0);
-
-    // 今週の日曜日
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6);
+    const end = new Date(now);
+    end.setDate(now.getDate() + 7);
     end.setHours(23,59,59,999);
 
     const list = events.filter(e => {
 
         const d = eventDate(e);
 
-        return d >= start && d <= end;
+        return d >= now && d <= end;
 
     });
 
     if(list.length === 0){
 
-        weekEvents.innerHTML = "今週の予定はありません。";
+        weekEvents.innerHTML = "近日の予定はありません。";
         return;
 
     }
 
     weekEvents.innerHTML = "";
 
+    const weekName = ["日","月","火","水","木","金","土"];
+
     list.forEach(e => {
 
+        const d = eventDate(e);
+
         weekEvents.innerHTML += `
-        <p>
-            <strong>${e.month}/${e.date}</strong>
-            ${e.time}<br>
-            ${e.title}
-        </p>
+        <div style="margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #eee;">
+            <strong>📅 ${e.month}/${e.date}（${weekName[d.getDay()]}）</strong><br>
+            🕛 ${e.time}<br>
+            📺 ${e.title}
+        </div>
         `;
 
     });
