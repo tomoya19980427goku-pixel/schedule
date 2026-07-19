@@ -3,7 +3,7 @@
 // service-worker.js
 // ==========================================
 
-const CACHE_NAME = "erina-zoom-v2";
+const CACHE_NAME = "erina-zoom-v3";
 
 
 // キャッシュする基本ファイルだけ
