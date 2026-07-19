@@ -25,7 +25,7 @@ header{
 }
 
 main{
-    max-width:900px;
+    max-width:1200px;
     margin:auto;
     padding:20px;
 }
@@ -34,8 +34,8 @@ main{
     background:white;
     border-radius:15px;
     box-shadow:0 2px 8px rgba(0,0,0,.1);
-    padding:20px;
-    margin-bottom:20px;
+    padding:25px;
+    margin-bottom:25px;
 }
 
 .card h2{
@@ -67,27 +67,28 @@ main{
 }
 
 #monthTitle{
-    font-size:26px;
+    font-size:30px;
     font-weight:bold;
 }
 
 .calendar{
     width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
 }
 
 .calendar th{
     background:#ffb6d9;
-    padding:12px;
-    font-size:18px;
+    padding:15px;
+    font-size:20px;
 }
 
 .calendar td{
     width:14.2%;
-    height:90px;
+    height:130px;
     border:1px solid #ddd;
     vertical-align:top;
-    padding:6px;
+    padding:8px;
     cursor:pointer;
     transition:.2s;
 }
@@ -101,22 +102,41 @@ main{
     font-weight:bold;
 }
 
-.event-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
+.day-number{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.calendar-event{
+    font-size:13px;
+    font-weight:bold;
+    padding:4px 6px;
     margin-top:5px;
+    border-radius:6px;
+    color:white;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.calendar-event:hover{
+    transform:scale(1.03);
+    opacity:.9;
 }
 
 .zoom-button{
     display:inline-block;
     margin-top:10px;
-    padding:10px 18px;
+    padding:12px 20px;
     background:#ff69b4;
     color:white;
     text-decoration:none;
     border-radius:10px;
     font-weight:bold;
+    font-size:16px;
 }
 
 .zoom-button:hover{
@@ -143,8 +163,17 @@ header{
 }
 
 .calendar td{
-    height:70px;
-    font-size:14px;
+    height:90px;
+    font-size:13px;
+}
+
+.day-number{
+    font-size:18px;
+}
+
+.calendar-event{
+    font-size:10px;
+    padding:2px 4px;
 }
 
 .calendar-header button{
@@ -152,18 +181,22 @@ header{
 }
 
 #monthTitle{
-    font-size:20px;
+    font-size:22px;
+}
+
+.zoom-button{
+    width:100%;
+    text-align:center;
 }
 
 }
 .calendar-event{
+    color:#fff;
     font-size:11px;
-    padding:2px 4px;
     margin-top:3px;
+    padding:2px 4px;
     border-radius:4px;
-    color:white;
-    font-weight:bold;
+    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap;
 }

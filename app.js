@@ -184,7 +184,9 @@ function renderCalendar(){
 
         cell.dataset.day=day;
 
-        cell.innerHTML=`<strong>${day}</strong>`;
+        cell.innerHTML = `
+<div class="day-number">${day}</div>
+`;
 
         // 今日を黄色
         if(
@@ -213,17 +215,14 @@ dayEvents.slice(0, 2).forEach(e => {
 
     eventLabel.className = "calendar-event";
 
-    eventLabel.textContent = e.title;
+    eventLabel.textContent = e.shortTitle || e.title;
+    eventLabel.addEventListener("click", (event) => {
+    event.stopPropagation();
+    showEvents(day);
+});
 
     eventLabel.style.background = e.color;
-    eventLabel.style.color = "#fff";
-    eventLabel.style.fontSize = "11px";
-    eventLabel.style.marginTop = "3px";
-    eventLabel.style.padding = "2px 4px";
-    eventLabel.style.borderRadius = "4px";
-    eventLabel.style.whiteSpace = "nowrap";
-    eventLabel.style.overflow = "hidden";
-    eventLabel.style.textOverflow = "ellipsis";
+ 
 
     cell.appendChild(eventLabel);
 
@@ -279,37 +278,44 @@ if (dayEvents.length > 2) {
 
 function loadWeekEvents(){
 
-    const now=new Date();
+    const now = new Date();
 
-    const week=new Date();
+    // 今週の月曜日
+    const start = new Date(now);
+    const day = start.getDay();
+    const diff = (day === 0) ? -6 : 1 - day;
+    start.setDate(start.getDate() + diff);
+    start.setHours(0,0,0,0);
 
-    week.setDate(now.getDate()+7);
+    // 今週の日曜日
+    const end = new Date(start);
+    end.setDate(start.getDate() + 6);
+    end.setHours(23,59,59,999);
 
-    const list=events.filter(e=>{
+    const list = events.filter(e => {
 
-        const d=eventDate(e);
+        const d = eventDate(e);
 
-        return d>=now && d<=week;
+        return d >= start && d <= end;
 
     });
 
-    if(list.length===0){
+    if(list.length === 0){
 
-        weekEvents.innerHTML="今週の予定はありません。";
-
+        weekEvents.innerHTML = "今週の予定はありません。";
         return;
 
     }
 
-    weekEvents.innerHTML="";
+    weekEvents.innerHTML = "";
 
-    list.forEach(e=>{
+    list.forEach(e => {
 
-        weekEvents.innerHTML+=`
+        weekEvents.innerHTML += `
         <p>
-        <strong>${e.month}/${e.date}</strong>
-        ${e.time}<br>
-        ${e.title}
+            <strong>${e.month}/${e.date}</strong>
+            ${e.time}<br>
+            ${e.title}
         </p>
         `;
 
@@ -413,3 +419,11 @@ nextMonth.addEventListener("click",()=>{
     renderCalendar();
 
 });
+// ==============================
+// 初期表示
+// ==============================
+
+loadTodayEvents();
+loadNextEvent();
+loadWeekEvents();
+renderCalendar();
