@@ -33,7 +33,7 @@ const events = [
     "endTime": "14:30",
     "title": "🍒 休日チェリーライブ",
     "shortTitle": "🍒チェリー",
-    "image": "images/S__305651735.jpg",
+    "image": "",
     "url": "https://us06web.zoom.us/j/81508872311?pwd=i01nYlbwEYec6hF2w1loy4yK0fgjCl.1",
     "color": "#e74c3c",
     "category": "cherry"
