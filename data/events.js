@@ -50,5 +50,18 @@ const events = [
     "url": "",
     "color": "#e74c3c",
     "category": "cherry"
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "date": 31,
+    "time": "12:00",
+    "endTime": "14;00",
+    "title": "テストイベント",
+    "shortTitle": "テスト",
+    "image": "",
+    "url": "",
+    "color": "#b56bff",
+    "category": ""
   }
 ];
