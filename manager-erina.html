@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ERINA 管理画面</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🔒 ERINA 管理画面</h1>
+
+</header>
+
+<main>
+
+<section class="card" id="loginArea">
+
+<h2>管理者ログイン</h2>
+
+<input
+id="password"
+type="password"
+placeholder="パスワードを入力">
+
+<br><br>
+
+<button id="loginButton">
+ログイン
+</button>
+
+<p id="loginMessage"></p>
+
+</section>
+
+<section
+class="card"
+id="adminArea"
+style="display:none;">
+
+<h2>イベント管理</h2>
+
+<p>ログイン成功！</p>
+
+<button id="addEventButton">
+＋ 新しいイベント
+</button>
+
+<hr>
+
+<div id="eventList">
+
+イベント一覧を読み込みます...
+
+</div>
+<hr>
+
+<h2>イベント編集</h2>
+
+<div id="editor" style="display:none;">
+
+<label>年</label><br>
+<input id="editYear" type="number"><br><br>
+
+<label>月</label><br>
+<input id="editMonth" type="number"><br><br>
+
+<label>日</label><br>
+<input id="editDate" type="number"><br><br>
+
+<label>時間</label><br>
+<input id="editTime" type="text"><br><br>
+
+<label>終了時間</label><br>
+<input id="editEndTime" type="text"><br><br>
+
+<label>タイトル</label><br>
+<input id="editTitle" type="text"><br><br>
+
+<label>短いタイトル</label><br>
+<input id="editShortTitle" type="text"><br><br>
+
+<label>画像</label><br>
+<input id="editImage" type="text"><br><br>
+
+<label>ZoomURL</label><br>
+<input id="editUrl" type="text"><br><br>
+
+<label>色</label><br>
+<input id="editColor" type="color"><br><br>
+
+<label>カテゴリー</label><br>
+<input id="editCategory" type="text"><br><br>
+
+<button id="saveButton">
+
+保存
+
+</button>
+
+</div>
+</section>
+
+</main>
+
+<script src="data/events.js"></script>
+<script src="manager.js"></script>
+
+</body>
+
+</html>
