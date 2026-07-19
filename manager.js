@@ -45,6 +45,9 @@ const editCategory = document.getElementById("editCategory");
 const saveButton = document.getElementById("saveButton");
 const addEventButton = document.getElementById("addEventButton");
 
+const imageUpload = document.getElementById("imageUpload");
+const uploadImageButton = document.getElementById("uploadImageButton");
+
 
 // 編集中イベント番号
 
@@ -578,3 +581,121 @@ function duplicateEvent(index){
 
 
 }
+// ------------------------------
+// 画像アップロード
+// ------------------------------
+
+uploadImageButton.addEventListener("click", async()=>{
+
+
+    const file = imageUpload.files[0];
+
+
+    if(!file){
+
+        alert("画像を選択してください");
+
+        return;
+
+    }
+
+
+
+    const reader = new FileReader();
+
+
+
+    reader.onload = async()=>{
+
+
+        const base64 = reader.result.split(",")[1];
+
+
+
+        try{
+
+
+            const response = await fetch(
+
+                "https://erina-manager.tomoya19980427goku.workers.dev/",
+
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":"application/json"
+
+                    },
+
+
+                    body:JSON.stringify({
+
+                        type:"image",
+
+                        filename:file.name,
+
+                        content:base64
+
+                    })
+
+                }
+
+            );
+
+
+
+            const result = await response.json();
+
+
+
+            if(result.success){
+
+
+                editImage.value = result.url;
+
+
+                alert("画像アップロードしました！");
+
+
+            }else{
+
+
+                alert(
+
+                    "アップロード失敗\n"+
+
+                    result.error
+
+                );
+
+
+            }
+
+
+
+        }catch(error){
+
+
+            alert(
+
+                "通信エラー\n"+
+
+                error
+
+            );
+
+
+        }
+
+
+    };
+
+
+
+    reader.readAsDataURL(file);
+
+
+
+});
