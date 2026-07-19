@@ -231,36 +231,48 @@ saveButton.addEventListener("click", async()=>{
     
 
 
-    // 編集内容を反映
+// 編集内容
 
-    events[editingIndex] = {
+const newEvent = {
 
-        year:Number(editYear.value),
+    year:Number(editYear.value),
 
-        month:Number(editMonth.value),
+    month:Number(editMonth.value),
 
-        date:Number(editDate.value),
+    date:Number(editDate.value),
 
-        time:editTime.value,
+    time:editTime.value,
 
-        endTime:editEndTime.value,
+    endTime:editEndTime.value,
+
+    title:editTitle.value,
+
+    shortTitle:editShortTitle.value,
+
+    image:editImage.value,
+
+    url:editUrl.value,
+
+    color:editColor.value,
+
+    category:editCategory.value
+
+};
 
 
-        title:editTitle.value,
+// 新規追加の場合
 
-        shortTitle:editShortTitle.value,
+if(editingIndex === null){
 
+    events.push(newEvent);
 
-        image:editImage.value,
+}else{
 
-        url:editUrl.value,
+    // 編集の場合
 
+    events[editingIndex] = newEvent;
 
-        color:editColor.value,
-
-        category:editCategory.value
-
-    };
+}
 
 
     // Workerへ送信
@@ -424,5 +436,62 @@ async function saveEventsToGitHub(){
         );
 
     }
+
+}
+// ------------------------------
+// イベント複製
+// ------------------------------
+
+function duplicateEvent(index){
+
+    const original = events[index];
+
+
+    const copy = {
+
+        year: original.year,
+
+        month: original.month,
+
+        date: original.date,
+
+        time: original.time,
+
+        endTime: original.endTime || "",
+
+
+        title: original.title + "（コピー）",
+
+        shortTitle: original.shortTitle || "",
+
+
+        image: original.image || "",
+
+        url: original.url || "",
+
+
+        color: original.color || "#ff69b4",
+
+        category: original.category || ""
+
+    };
+
+
+    // コピーを追加
+
+    events.push(copy);
+
+
+    // 一覧更新
+
+    loadEventList();
+
+
+    // 追加したものを編集状態へ
+
+    editingIndex = events.length - 1;
+
+    editEvent(editingIndex);
+
 
 }
