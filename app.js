@@ -4,6 +4,47 @@
 // 第1弾
 // ==========================================
 
+// ==========================================
+// イベントデータ読み込み
+// ==========================================
+
+let events = [];
+
+
+async function loadEvents(){
+
+    try{
+
+        const response = await fetch(
+            "./data/events.js?v=" + Date.now()
+        );
+
+
+        const text = await response.text();
+
+
+        const json = text
+            .replace("const events =", "")
+            .replace(";", "")
+            .trim();
+
+
+        events = JSON.parse(json);
+
+
+        startApp();
+
+
+    }catch(error){
+
+        console.error(
+            "イベント読み込み失敗",
+            error
+        );
+
+    }
+
+}
 // 今日の日付
 const today = new Date();
 
@@ -469,13 +510,36 @@ window.onclick = function(event){
 
 };
 // ==============================
-// 初期表示
+// アプリ開始
 // ==============================
 
-loadTodayEvents();
-loadNextEvent();
-loadWeekEvents();
-renderCalendar();
+function startApp(){
+
+
+    // イベント並び替え
+
+    events.sort((a,b)=>{
+
+        return eventDate(a)-eventDate(b);
+
+    });
+
+
+    loadTodayEvents();
+
+    loadNextEvent();
+
+    loadWeekEvents();
+
+    renderCalendar();
+
+
+}
+
+
+// 読み込み開始
+
+loadEvents();
 // ==============================
 // 画像拡大
 // ==============================
