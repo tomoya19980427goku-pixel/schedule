@@ -156,3 +156,14 @@ header{
 }
 
 }
+.calendar-event{
+    font-size:11px;
+    padding:2px 4px;
+    margin-top:3px;
+    border-radius:4px;
+    color:white;
+    font-weight:bold;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
