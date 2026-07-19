@@ -175,15 +175,49 @@ function editEvent(index){
 // 仮機能
 // ------------------------------
 
-function duplicateEvent(index){
-
-    alert("Part②で作ります。");
-
-}
+// ------------------------------
+// イベント削除
+// ------------------------------
 
 function deleteEvent(index){
 
-    alert("Part②で作ります。");
+    const e = events[index];
+
+
+    const result = confirm(
+        `${e.title}\n\nこのイベントを削除しますか？`
+    );
+
+
+    if(!result){
+
+        return;
+
+    }
+
+
+    // 配列から削除
+
+    events.splice(index,1);
+
+
+    // 一覧更新
+
+    loadEventList();
+
+
+    // 編集画面を閉じる
+
+    editor.style.display="none";
+
+
+    editingIndex = null;
+
+
+    // GitHubへ保存
+
+    saveEventsToGitHub();
+
 
 }
 
@@ -193,55 +227,7 @@ function deleteEvent(index){
 
 saveButton.addEventListener("click", async()=>{
 
-if(editingIndex === null){
 
-    // 新規追加
-
-    events.push({
-
-        year:Number(editYear.value),
-        month:Number(editMonth.value),
-        date:Number(editDate.value),
-
-        time:editTime.value,
-        endTime:editEndTime.value,
-
-        title:editTitle.value,
-        shortTitle:editShortTitle.value,
-
-        image:editImage.value,
-        url:editUrl.value,
-
-        color:editColor.value,
-        category:editCategory.value
-
-    });
-
-}else{
-
-    // 編集更新
-
-    events[editingIndex] = {
-
-        year:Number(editYear.value),
-        month:Number(editMonth.value),
-        date:Number(editDate.value),
-
-        time:editTime.value,
-        endTime:editEndTime.value,
-
-        title:editTitle.value,
-        shortTitle:editShortTitle.value,
-
-        image:editImage.value,
-        url:editUrl.value,
-
-        color:editColor.value,
-        category:editCategory.value
-
-    };
-
-}
     
 
 
@@ -387,3 +373,56 @@ addEventButton.addEventListener("click",()=>{
     });
 
 });
+// ------------------------------
+// GitHub保存
+// ------------------------------
+
+async function saveEventsToGitHub(){
+
+    try{
+
+        const response = await fetch(
+            "https://erina-manager.tomoya19980427goku.workers.dev/",
+            {
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+                    events:events
+                })
+
+            }
+        );
+
+
+        const result = await response.json();
+
+
+        if(result.success){
+
+            alert("削除しました！");
+
+        }else{
+
+            alert(
+                "保存失敗\n"+
+                result.error
+            );
+
+        }
+
+
+    }catch(error){
+
+        alert(
+            "通信エラー\n"+
+            error
+        );
+
+    }
+
+}
