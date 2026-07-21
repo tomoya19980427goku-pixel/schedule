@@ -37,5 +37,18 @@ const events = [
     "url": "https://us06web.zoom.us/j/81508872311?pwd=i01nYlbwEYec6hF2w1loy4yK0fgjCl.1",
     "color": "#e74c3c",
     "category": "cherry"
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "date": 27,
+    "time": "19:00",
+    "endTime": "20:30",
+    "title": "📻 ナイトFMなまず",
+    "shortTitle": "📻FM",
+    "image": "",
+    "url": "",
+    "color": "#f39c12",
+    "category": "fm"
   }
 ];
