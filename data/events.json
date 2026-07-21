@@ -1,4 +1,4 @@
-const events = [
+[
   {
     "year": 2026,
     "month": 7,
@@ -38,4 +38,4 @@ const events = [
     "color": "#e74c3c",
     "category": "cherry"
   }
-];
+]

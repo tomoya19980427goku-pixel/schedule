@@ -1,138 +1,898 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>ERINA 管理画面</title>
+    <meta name="robots" content="noindex,nofollow">
 
-<link rel="stylesheet" href="style.css">
+    <title>ERINA Zoom 管理画面</title>
 
+    <style>
+
+        /* =========================================
+           基本
+           ========================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Hiragino Kaku Gothic ProN",
+                "Hiragino Sans",
+                "Yu Gothic",
+                "Meiryo",
+                sans-serif;
+
+            background: #f4f7f5;
+            color: #263238;
+
+            line-height: 1.6;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           ヘッダー
+           ========================================= */
+
+        .manager-header {
+            background: #247447;
+            color: white;
+
+            padding: 20px;
+        }
+
+        .manager-header-inner {
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+        .manager-header h1 {
+            margin: 0;
+
+            font-size: 1.8rem;
+        }
+
+        .manager-header p {
+            margin: 5px 0 0;
+
+            opacity: 0.9;
+        }
+
+
+        /* =========================================
+           メイン
+           ========================================= */
+
+        main {
+            width: min(
+                1000px,
+                calc(100% - 24px)
+            );
+
+            margin: 24px auto 60px;
+        }
+
+
+        /* =========================================
+           カード
+           ========================================= */
+
+        .panel {
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, 0.07);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+        }
+
+
+        /* =========================================
+           フォーム
+           ========================================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 800;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+
+            border: 2px solid #dce5e0;
+
+            border-radius: 10px;
+
+            padding: 12px;
+
+            background: white;
+
+            color: #263238;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+
+            border-color: #247447;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(36, 116, 71, 0.12);
+        }
+
+        textarea {
+            min-height: 90px;
+
+            resize: vertical;
+        }
+
+        .help {
+            color: #6f7b74;
+
+            font-size: 0.88rem;
+        }
+
+
+        /* =========================================
+           ボタン
+           ========================================= */
+
+        .button {
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 12px 18px;
+
+            font-weight: 800;
+        }
+
+        .button-primary {
+            background: #247447;
+            color: white;
+        }
+
+        .button-secondary {
+            background: #e8eeeb;
+            color: #263238;
+        }
+
+        .button-danger {
+            background: #c62828;
+            color: white;
+        }
+
+        .button-blue {
+            background: #1976d2;
+            color: white;
+        }
+
+        .button-row {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 18px;
+        }
+
+
+        /* =========================================
+           イベント一覧
+           ========================================= */
+
+        #eventList {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .event-list-item {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            border: 1px solid #dde5e1;
+
+            border-radius: 12px;
+
+            padding: 14px;
+        }
+
+        .event-list-title {
+            font-weight: 800;
+        }
+
+        .event-list-date {
+            margin-top: 3px;
+
+            color: #66736c;
+        }
+
+        .event-list-buttons {
+            display: flex;
+
+            gap: 7px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =========================================
+           画像
+           ========================================= */
+
+        .image-box {
+            border: 2px dashed #cad6d0;
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            background: #fafcfb;
+        }
+
+        #imagePreviewArea {
+            margin-top: 15px;
+        }
+
+        #imagePreviewArea:empty {
+            display: none;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 500px;
+
+            margin: auto;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+        }
+
+        .image-status {
+            margin-top: 10px;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            background: #edf6f0;
+
+            color: #247447;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           プログラム
+           ========================================= */
+
+        #programList {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .program-editor-item {
+            border: 1px solid #dce5e0;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            background: #fafcfb;
+        }
+
+        .program-row {
+            display: grid;
+
+            grid-template-columns:
+                120px
+                1fr
+                1fr;
+
+            gap: 10px;
+        }
+
+        .program-actions {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =========================================
+           保存状態
+           ========================================= */
+
+        #statusMessage {
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            font-weight: 800;
+        }
+
+        #statusMessage.success {
+            display: block;
+
+            background: #e7f6eb;
+
+            color: #176d37;
+        }
+
+        #statusMessage.error {
+            display: block;
+
+            background: #fdeaea;
+
+            color: #b71c1c;
+        }
+
+        #statusMessage.loading {
+            display: block;
+
+            background: #eaf3fb;
+
+            color: #1565c0;
+        }
+
+
+        /* =========================================
+           スマホ
+           ========================================= */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .manager-header h1 {
+                font-size: 1.45rem;
+            }
+
+            main {
+                width:
+                    calc(100% - 16px);
+
+                margin-top: 12px;
+            }
+
+            .panel {
+                padding: 16px;
+
+                border-radius: 13px;
+            }
+
+            .form-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .program-row {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .event-list-item {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .event-list-buttons {
+                width: 100%;
+            }
+
+            .event-list-buttons button {
+                flex: 1;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .button-row .button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<header>
 
-<h1>🔒 ERINA 管理画面</h1>
+<!-- =========================================
+     ヘッダー
+     ========================================= -->
+
+<header class="manager-header">
+
+    <div class="manager-header-inner">
+
+        <h1>
+            ERINA Zoom 管理画面
+        </h1>
+
+        <p>
+            催事の追加・編集・画像アップロード
+        </p>
+
+    </div>
 
 </header>
 
+
 <main>
 
-<section class="card" id="loginArea">
 
-<h2>管理者ログイン</h2>
+    <!-- =====================================
+         状態表示
+         ===================================== -->
 
-<input
-id="password"
-type="password"
-placeholder="パスワードを入力">
+    <div id="statusMessage"></div>
 
-<br><br>
 
-<button id="loginButton">
-ログイン
-</button>
+    <!-- =====================================
+         イベント一覧
+         ===================================== -->
 
-<p id="loginMessage"></p>
+    <section class="panel">
 
-</section>
+        <h2>
+            📅 登録済み催事
+        </h2>
 
-<section
-class="card"
-id="adminArea"
-style="display:none;">
+        <div class="button-row">
 
-<h2>イベント管理</h2>
+            <button
+                type="button"
+                id="newEventButton"
+                class="button button-primary"
+            >
+                ＋ 新しい催事を追加
+            </button>
 
-<p>ログイン成功！</p>
+            <button
+                type="button"
+                id="reloadButton"
+                class="button button-secondary"
+            >
+                🔄 最新データを読み込む
+            </button>
 
-<button id="addEventButton">
-＋ 新しいイベント
-</button>
+        </div>
 
-<hr>
+        <div
+            id="eventList"
+            style="margin-top:20px;"
+        >
+            読み込み中...
+        </div>
 
-<div id="eventList">
+    </section>
 
-イベント一覧を読み込みます...
 
-</div>
-<hr>
+    <!-- =====================================
+         イベント編集
+         ===================================== -->
 
-<h2>イベント編集</h2>
+    <section
+        class="panel"
+        id="editorPanel"
+    >
 
-<div id="editor" style="display:none;">
+        <h2 id="editorTitle">
+            ✏️ 催事を編集
+        </h2>
 
-<label>年</label><br>
-<input id="editYear" type="number"><br><br>
 
-<label>月</label><br>
-<input id="editMonth" type="number"><br><br>
+        <!-- 内部ID -->
 
-<label>日</label><br>
-<input id="editDate" type="number"><br><br>
+        <input
+            type="hidden"
+            id="eventId"
+        >
 
-<label>時間</label><br>
-<input id="editTime" type="text"><br><br>
 
-<label>終了時間</label><br>
-<input id="editEndTime" type="text"><br><br>
+        <div class="form-grid">
 
-<label>タイトル</label><br>
-<input id="editTitle" type="text"><br><br>
 
-<label>短いタイトル</label><br>
-<input id="editShortTitle" type="text"><br><br>
+            <!-- 催事名 -->
 
-<label>画像</label><br>
+            <div class="field full">
 
-<input 
-id="imageUpload"
-type="file"
-accept="image/*">
+                <label for="title">
+                    催事名
+                </label>
 
-<br><br>
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="例：🍒 休日チェリーLive"
+                >
 
-<input 
-id="editImage"
-type="text"
-placeholder="画像URL">
+            </div>
 
-<br><br>
 
-<button id="uploadImageButton">
-画像アップロード
-</button>
+            <!-- カレンダー用短縮名 -->
 
-<br><br>
+            <div class="field">
 
-<label>ZoomURL</label><br>
-<input id="editUrl" type="text"><br><br>
+                <label for="shortTitle">
+                    カレンダー用の短い名前
+                </label>
 
-<label>色</label><br>
-<input id="editColor" type="color"><br><br>
+                <input
+                    type="text"
+                    id="shortTitle"
+                    placeholder="例：🍒チェリー"
+                >
 
-<label>カテゴリー</label><br>
-<input id="editCategory" type="text"><br><br>
+                <div class="help">
+                    カレンダーの小さい枠に表示します。
+                </div>
 
-<button id="saveButton">
+            </div>
 
-保存
 
-</button>
+            <!-- カテゴリー -->
 
-</div>
-</section>
+            <div class="field">
+
+                <label for="category">
+                    カテゴリー
+                </label>
+
+                <select id="category">
+
+                    <option value="">
+                        その他
+                    </option>
+
+                    <option value="cherry">
+                        チェリーLive
+                    </option>
+
+                    <option value="fm">
+                        FMなまず
+                    </option>
+
+                    <option value="seminar">
+                        セミナー
+                    </option>
+
+                    <option value="event">
+                        その他催事
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- 開催日 -->
+
+            <div class="field">
+
+                <label for="eventDate">
+                    開催日
+                </label>
+
+                <input
+                    type="date"
+                    id="eventDate"
+                >
+
+            </div>
+
+
+            <!-- 色 -->
+
+            <div class="field">
+
+                <label for="eventColor">
+                    カレンダーの色
+                </label>
+
+                <input
+                    type="color"
+                    id="eventColor"
+                    value="#247447"
+                >
+
+            </div>
+
+
+            <!-- 開始時間 -->
+
+            <div class="field">
+
+                <label for="startTime">
+                    開始時間
+                </label>
+
+                <input
+                    type="time"
+                    id="startTime"
+                >
+
+            </div>
+
+
+            <!-- 終了時間 -->
+
+            <div class="field">
+
+                <label for="endTime">
+                    終了時間
+                </label>
+
+                <input
+                    type="time"
+                    id="endTime"
+                >
+
+                <div class="help">
+                    分からない場合は空欄でもOKです。
+                </div>
+
+            </div>
+
+
+            <!-- Zoom URL -->
+
+            <div class="field full">
+
+                <label for="zoomUrl">
+                    Zoom URL
+                </label>
+
+                <input
+                    type="url"
+                    id="zoomUrl"
+                    placeholder="https://zoom.us/..."
+                >
+
+                <div class="help">
+                    入力した場合だけ「Zoomに参加」ボタンが表示されます。
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         画像
+         ===================================== -->
+
+    <section class="panel">
+
+        <h2>
+            🖼 催事画像
+        </h2>
+
+        <div class="image-box">
+
+            <input
+                type="file"
+                id="imageFile"
+                accept="image/jpeg,image/png,image/webp"
+            >
+
+            <div class="help">
+                画像が必要な催事だけ選択してください。
+                画像を登録しない場合、利用者画面には画像欄自体が表示されません。
+            </div>
+
+
+            <div id="imagePreviewArea"></div>
+
+
+            <div class="button-row">
+
+                <button
+                    type="button"
+                    id="removeImageButton"
+                    class="button button-danger"
+                >
+                    画像を削除
+                </button>
+
+            </div>
+
+
+            <!-- 現在保存されている画像 -->
+
+            <input
+                type="hidden"
+                id="currentImage"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         催事スケジュール
+         ===================================== -->
+
+    <section class="panel">
+
+        <h2>
+            📋 催事スケジュール
+        </h2>
+
+        <p class="help">
+
+            ゲスト・ナビゲーター・Myエリナ・
+            商品紹介などを必要な順番で追加できます。
+
+        </p>
+
+
+        <div id="programList"></div>
+
+
+        <div class="button-row">
+
+            <button
+                type="button"
+                id="addProgramButton"
+                class="button button-blue"
+            >
+                ＋ 項目を追加
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         保存
+         ===================================== -->
+
+    <section class="panel">
+
+        <h2>
+            💾 保存
+        </h2>
+
+        <p class="help">
+
+            保存するとCloudflare Worker経由で
+            GitHubのデータを更新します。
+
+        </p>
+
+
+        <div class="button-row">
+
+            <button
+                type="button"
+                id="saveButton"
+                class="button button-primary"
+            >
+                💾 この催事を保存
+            </button>
+
+            <button
+                type="button"
+                id="deleteButton"
+                class="button button-danger"
+            >
+                🗑 この催事を削除
+            </button>
+
+            <button
+                type="button"
+                id="clearButton"
+                class="button button-secondary"
+            >
+                入力をクリア
+            </button>
+
+        </div>
+
+    </section>
+
 
 </main>
 
-<script src="data/events.js"></script>
+
+<!-- =========================================
+     JavaScript
+     ========================================= -->
+
 <script src="manager.js"></script>
 
-</body>
 
+</body>
 </html>

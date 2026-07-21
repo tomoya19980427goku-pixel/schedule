@@ -1,140 +1,154 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>ERINA Zoomスケジュール</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<link rel="stylesheet" href="style.css">
+    <title>ERINA Zoom予定表</title>
 
-<link rel="manifest" href="manifest.json">
+    <meta
+        name="theme-color"
+        content="#0d6efd">
 
-<meta name="theme-color" content="#ff69b4">
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
 
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default">
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="ERINA Zoom">
+
+    <link
+        rel="manifest"
+        href="manifest.json">
+
+    <link
+        rel="apple-touch-icon"
+        href="images/icon-192.png">
+
+    <link
+        rel="icon"
+        href="images/icon-192.png">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
 
 </head>
 
 <body>
 
-<header>
-    <h1>📅 ERINA Zoomスケジュール</h1>
+<div class="container">
+    <header>
+
+    <h1>
+
+        ERINA Zoom予定表
+
+    </h1>
+
 </header>
+<section class="home-section">
 
-<main>
+    <h2>
 
-    <!-- 今日のZoom -->
-    <section class="card">
-        <h2>📢 今日のZoom</h2>
-        <div id="todayEvents">
-            読み込み中...
-        </div>
-    </section>
+        📅 今日のZoom
 
-    <!-- 次回Zoom -->
-    <section class="card">
-        <h2>⏭ 次回のZoom</h2>
-        <div id="nextEvent">
-            読み込み中...
-        </div>
-    </section>
+    </h2>
 
-    <!-- 今週の予定 -->
-    <section class="card">
-        <h2>📅 近日の予定</h2>
-        <div id="weekEvents">
-            読み込み中...
-        </div>
-    </section>
+    <div id="todayEvents">
 
-    <!-- カレンダー -->
-    <section class="card">
+    </div>
 
-        <div class="calendar-header">
+</section>
+<section class="home-section">
 
-            <button id="prevMonth">◀</button>
+    <h2>
 
-            <h2 id="monthTitle"></h2>
+        ⏭ 次回Zoom
 
-            <button id="nextMonth">▶</button>
+    </h2>
 
-        </div>
+    <div id="nextEvent">
 
-        <table class="calendar">
+    </div>
 
-            <thead>
-                <tr>
-                    <th>月</th>
-                    <th>火</th>
-                    <th>水</th>
-                    <th>木</th>
-                    <th>金</th>
-                    <th>土</th>
-                    <th>日</th>
-                </tr>
-            </thead>
+</section>
+<section class="calendar-section">
 
-            <tbody id="calendarBody">
+    <div class="calendar-header">
 
-            </tbody>
+        <button id="prevMonth">
 
-        </table>
+            ◀
 
-    </section>
+        </button>
 
-    <!-- 選択日の予定 -->
-    <section class="card">
-        <h2>📌 この日の予定</h2>
+        <h2 id="monthTitle">
 
-        <div id="selectedDate">
-            日付を押すと予定が表示されます。
-        </div>
+            2026年7月
 
-    </section>
+        </h2>
 
-</main>
+        <button id="nextMonth">
 
-<footer>
+            ▶
 
-    <p>ERINA Zoom Schedule Ver.3.0</p>
+        </button>
 
-</footer>
+    </div>
 
-<!-- =========================
-     イベント詳細ポップアップ
-========================= -->
+    <div id="calendar">
 
-<div id="eventModal" class="modal">
+    </div>
+
+</section>
+<!-- ==========================
+     イベント詳細モーダル
+========================== -->
+
+<div
+    id="eventModal"
+    class="modal">
 
     <div class="modal-content">
 
-        <span id="closeModal" class="close">&times;</span>
+        <button
+            id="closeModal"
+            class="close-button">
 
-        <div id="modalBody"></div>
+            ×
+
+        </button>
+
+        <div id="modalBody">
+
+        </div>
 
     </div>
 
 </div>
-<!-- =========================
-     画像拡大用
-========================= -->
+<footer>
 
-<div id="imageModal" class="modal">
+    <p>
 
-    <span id="closeImageModal" class="close">&times;</span>
+        © 2026 ERINA Zoom Schedule
 
-    <img id="modalImage" class="modal-image">
+    </p>
 
+</footer>
+<script src="app.js"></script>
 </div>
-<script src="app.js?v=3"></script>
-
-<script>
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./service-worker.js");
-}
-</script>
 
 </body>
+
 </html>
