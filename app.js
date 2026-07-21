@@ -244,7 +244,13 @@ async function loadEvents(
 
 
         events =
-            normalizedEvents;
+    normalizedEvents;
+
+
+console.log(
+    "取得イベント",
+    events
+);
 
         lastDataSignature =
             newSignature;
