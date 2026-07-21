@@ -27,6 +27,10 @@ let lastDataSignature = "";
 
 let refreshTimer = null;
 
+// 表示形式
+// schedule = スケジュール表
+// calendar = カレンダー
+let displayMode = "schedule";
 
 /* =========================================================
    2. DOM
@@ -528,7 +532,10 @@ function renderAll() {
 
     renderWeekEvents();
 
+    renderScheduleList();
+
     renderCalendar();
+
 
 }
 
@@ -2592,5 +2599,73 @@ function escapeHTML(value) {
 function escapeAttribute(value) {
 
     return escapeHTML(value);
+
+}
+
+function renderScheduleList(){
+
+    const area =
+    document.getElementById(
+        "scheduleList"
+    );
+
+    if(!area){
+        return;
+    }
+
+
+    area.innerHTML="";
+
+
+    events
+    .sort(compareEvents)
+    .forEach(event=>{
+
+
+        const div =
+        document.createElement("div");
+
+
+        div.className =
+        "schedule-card";
+
+
+        div.innerHTML = `
+
+        <div class="schedule-date">
+
+        ${formatJapaneseDate(event)}
+
+        </div>
+
+
+        <div class="schedule-time">
+
+        🕒 ${event.startTime}
+
+        </div>
+
+
+        <div class="schedule-title">
+
+        ${escapeHTML(event.title)}
+
+        </div>
+
+        `;
+
+
+        div.onclick = ()=>{
+
+            openEventModal(event);
+
+        };
+
+
+        area.appendChild(div);
+
+
+    });
+
 
 }

@@ -39,6 +39,27 @@
 
 </header>
 
+
+<!-- 表示切替 -->
+
+<div class="display-switch">
+
+    <button id="showSchedule">
+
+        📋予定表
+
+    </button>
+
+
+    <button id="showCalendar">
+
+        📅カレンダー
+
+    </button>
+
+</div>
+
+
 <main>
 
     <!-- 今日のZoom -->
@@ -75,27 +96,46 @@
 
     </section>
 
-    <!-- 今週 -->
+<!-- 今週 -->
 
-    <section class="card">
+<section class="card">
 
-        <h2>
+    <h2>
+        📅 今週の予定
+    </h2>
 
-            📅 今週の予定
+    <div id="weekEvents">
 
-        </h2>
+    </div>
 
-        <div id="weekEvents">
+</section>
 
-        </div>
 
-    </section>
+<!-- スケジュール表 -->
 
-    <!-- カレンダー -->
+<section 
+class="card"
+id="scheduleSection">
 
-    <section class="card">
+    <h2>
+        📋 スケジュール表
+    </h2>
 
-        <div class="calendar-header">
+
+    <div id="scheduleList">
+
+    </div>
+
+</section>
+
+
+<!-- カレンダー -->
+
+<section 
+class="card"
+id="calendarSection">
+
+    <div class="calendar-header">
 
             <button id="prevMonth">
 

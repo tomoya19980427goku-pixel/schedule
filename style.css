@@ -1196,3 +1196,86 @@ a:focus-visible {
     }
 
 }
+/* ==========================================
+   スケジュール表
+   ========================================== */
+
+
+#scheduleList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+.schedule-card{
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    box-shadow:
+    0 2px 8px rgba(0,0,0,0.12);
+
+    cursor:pointer;
+
+    border-left:6px solid #247447;
+
+    transition:0.2s;
+
+}
+
+
+
+.schedule-card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.schedule-date{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#333;
+
+}
+
+
+
+.schedule-time{
+
+    margin-top:8px;
+
+    font-size:16px;
+
+    color:#247447;
+
+    font-weight:bold;
+
+}
+
+
+
+.schedule-title{
+
+    margin-top:8px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#222;
+
+}
