@@ -1279,3 +1279,122 @@ a:focus-visible {
     color:#222;
 
 }
+/* ==========================================
+   表示切替ボタン
+   ========================================== */
+
+
+.display-switch{
+
+    display:flex;
+
+    gap:10px;
+
+    justify-content:center;
+
+    margin:15px auto;
+
+}
+
+
+
+.display-switch button{
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#2e7d32;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+
+.display-switch button:hover{
+
+    opacity:0.8;
+
+}
+
+
+/* ==========================================
+   スケジュール表
+   ========================================== */
+
+
+#scheduleList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+.schedule-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    border-left:8px solid #247447;
+
+    box-shadow:
+    0 3px 8px rgba(0,0,0,0.15);
+
+    cursor:pointer;
+
+}
+
+
+
+.schedule-date{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#333;
+
+}
+
+
+
+.schedule-time{
+
+    margin-top:8px;
+
+    font-size:16px;
+
+    color:#247447;
+
+    font-weight:bold;
+
+}
+
+
+
+.schedule-title{
+
+    margin-top:10px;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    color:#222;
+
+}

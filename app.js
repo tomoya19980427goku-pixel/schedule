@@ -109,11 +109,24 @@ async function initializeApp() {
     renderAll();
 
 
-    /*
-      ボタンなどのイベント設定
-    */
+const calendarSection =
+document.getElementById(
+    "calendarSection"
+);
 
-    setupEventListeners();
+
+if(calendarSection){
+
+    calendarSection.style.display="none";
+
+}
+
+
+/*
+  ボタンなどのイベント設定
+*/
+
+setupEventListeners();
 
 
     /*
@@ -532,10 +545,19 @@ function renderAll() {
 
     renderWeekEvents();
 
-    renderScheduleList();
 
-    renderCalendar();
+    if(displayMode === "schedule"){
 
+        renderScheduleList();
+
+    }
+
+
+    if(displayMode === "calendar"){
+
+        renderCalendar();
+
+    }
 
 }
 
@@ -1677,7 +1699,79 @@ function closeEventModal() {
    ========================================================= */
 
 function setupEventListeners() {
+// 表示切替
 
+const showSchedule =
+document.getElementById(
+    "showSchedule"
+);
+
+
+const showCalendar =
+document.getElementById(
+    "showCalendar"
+);
+
+
+
+if(showSchedule){
+
+    showSchedule.addEventListener(
+        "click",
+        ()=>{
+
+            displayMode = "schedule";
+
+            document
+            .getElementById(
+                "scheduleSection"
+            )
+            .style.display="block";
+
+
+            document
+            .getElementById(
+                "calendarSection"
+            )
+            .style.display="none";
+
+
+        }
+    );
+
+}
+
+
+
+if(showCalendar){
+
+    showCalendar.addEventListener(
+        "click",
+        ()=>{
+
+            displayMode = "calendar";
+
+
+            document
+            .getElementById(
+                "scheduleSection"
+            )
+            .style.display="none";
+
+
+            document
+            .getElementById(
+                "calendarSection"
+            )
+            .style.display="block";
+
+
+            renderCalendar();
+
+        }
+    );
+
+}
     /*
       前月
     */
