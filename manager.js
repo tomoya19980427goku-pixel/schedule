@@ -868,25 +868,25 @@ async function saveEvent(){
 
 
         const result =
-        await response.json();
-        console.log(
+await response.json();
+
+
+console.log(
     "Worker返答",
     result
 );
 
 
+if(
+    !result.success
+){
 
-        if(
-            !result.success
-        ){
+    throw new Error(
+        result.error ||
+        "保存失敗"
+    );
 
-            throw new Error(
-                result.error ||
-                "保存失敗"
-            );
-
-        }
-
+}
 
 
         showStatus(
