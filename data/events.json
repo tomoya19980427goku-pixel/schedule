@@ -8,7 +8,7 @@
     "shortTitle": "📻FM",
     "category": "fm",
     "color": "#247447",
-    "image": "images/event-1784668455818.jpg",
+    "image": "",
     "zoomUrl": "https://us06web.zoom.us/j/86184643416?pwd=HRDbK9qJDsIMsXNbUQh2TypatFajN5.1",
     "program": []
   },
@@ -22,7 +22,7 @@
     "category": "seminar",
     "color": "#1976d2",
     "image": "",
-    "zoomUrl": "",
+    "zoomUrl": "https://us06web.zoom.us/j/82075654454?pwd=fOABrry090GmJOPZmvEnJ5alOEytMi.1",
     "program": []
   },
   {
@@ -48,7 +48,7 @@
     "category": "fm",
     "color": "#247447",
     "image": "",
-    "zoomUrl": "",
+    "zoomUrl": "https://us06web.zoom.us/j/81027843098?pwd=PXv4xY4DrB8mOxI6veZDjmabYOxIZR.1",
     "program": []
   },
   {
@@ -61,7 +61,7 @@
     "category": "event",
     "color": "#8e44ad",
     "image": "",
-    "zoomUrl": "",
+    "zoomUrl": "https://us06web.zoom.us/j/84602857850?pwd=KaXVHarTMU5rPCqZNoPnan7LnA3PUh.1",
     "program": []
   },
   {
@@ -74,7 +74,7 @@
     "category": "event",
     "color": "#e91e63",
     "image": "",
-    "zoomUrl": "",
+    "zoomUrl": "https://us06web.zoom.us/j/81571154600?pwd=rIaefQagLtkgVSJZzFN1bTgqS2NXx4.1",
     "program": []
   },
   {
@@ -102,5 +102,49 @@
     "image": "",
     "zoomUrl": "",
     "program": []
+  },
+  {
+    "id": "20260803-ndwnqn",
+    "date": "2026-08-03",
+    "startTime": "13:00",
+    "endTime": "14:30",
+    "title": "第68回　のびしろの会",
+    "shortTitle": "のびしろ",
+    "category": "",
+    "color": "#754024",
+    "image": "",
+    "zoomUrl": "",
+    "program": [
+      {
+        "time": "13:00",
+        "title": "司会",
+        "person": "吉塚桂子SＭ"
+      },
+      {
+        "time": "13:05",
+        "title": "スキンケア紹介",
+        "person": "椿由希子Ｍ\n中村友光子M"
+      },
+      {
+        "time": "13:10",
+        "title": "KGフェーシャルマスク",
+        "person": "本社佐藤ビューティートレーナー"
+      },
+      {
+        "time": "13:25",
+        "title": "ヘルスケア　ABCとアロエジュース",
+        "person": "本社杉本課長"
+      },
+      {
+        "time": "13:50",
+        "title": "ハロートーク",
+        "person": "大宅SM・上野紀美子さん(RM)"
+      },
+      {
+        "time": "14:25",
+        "title": "次回ご案内佐賀オンライン・のびしろの会",
+        "person": "田島さとみＭ\n脇屋敷Ｍ"
+      }
+    ]
   }
 ]
