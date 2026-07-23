@@ -376,90 +376,71 @@ async function loadEvents(){
 
 function renderEventList(){
 
-
     if(!eventList){
-
         return;
-
     }
-
 
     eventList.innerHTML="";
 
-
     events.forEach(event=>{
 
-
         const item =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
         item.className =
         "event-list-item";
-
 
         item.innerHTML = `
 
         <div>
 
             <div class="event-list-title">
-
-                ${escapeHTML(
-                    event.title
-                )}
-
+                ${escapeHTML(event.title)}
             </div>
 
-
             <div class="event-list-date">
-
-                ${escapeHTML(
-                    event.date
-                )}
-               　
-                ${escapeHTML(
-                    event.startTime
-                )}
-
+                ${escapeHTML(event.date)}
+                　
+                ${escapeHTML(event.startTime)}
             </div>
 
         </div>
 
-
         <div class="event-list-buttons">
 
             <button
-            class="button button-blue">
+            class="button button-blue edit-btn">
                 編集
+            </button>
+
+            <button
+            class="button button-green duplicate-btn">
+                複製
             </button>
 
         </div>
 
         `;
 
-
         item
-        .querySelector(
-            "button"
-        )
+        .querySelector(".edit-btn")
         .onclick = ()=>{
 
-            editEvent(
-                event.id
-            );
+            editEvent(event.id);
 
         };
 
+        item
+        .querySelector(".duplicate-btn")
+        .onclick = ()=>{
 
-        eventList.appendChild(
-            item
-        );
+            duplicateEvent(event.id);
 
+        };
+
+        eventList.appendChild(item);
 
     });
-
 
 }
 
@@ -469,8 +450,7 @@ function renderEventList(){
 // 編集
 // ==========================================
 
-function editEvent(id){
-
+function duplicateEvent(id){
 
     const event =
     events.find(
@@ -479,84 +459,61 @@ function editEvent(id){
         String(id)
     );
 
-
     if(!event){
-
         return;
-
     }
 
+    editingEventId = null;
 
-    editingEventId =
-    event.id;
-
-
-    eventIdInput.value =
-    event.id || "";
-
+    eventIdInput.value = "";
 
     titleInput.value =
     event.title || "";
 
-
     shortTitleInput.value =
     event.shortTitle || "";
-
 
     categoryInput.value =
     event.category || "";
 
-
-    eventDateInput.value =
-    event.date || "";
-
+    eventDateInput.value = "";
 
     eventColorInput.value =
-    event.color ||
-    "#247447";
+    event.color || "#247447";
 
+    startTimeInput.value = "";
 
-    startTimeInput.value =
-    event.startTime || "";
+    endTimeInput.value = "";
 
+    zoomUrlInput.value = "";
 
-    endTimeInput.value =
-    event.endTime || "";
+    currentImageInput.value = "";
 
+    selectedImageFile = null;
 
-    zoomUrlInput.value =
-    event.zoomUrl || "";
+    removeCurrentImage = false;
 
-
-    currentImageInput.value =
-    event.image || "";
-
-
-    editorTitle.textContent =
-    "✏️ 催事を編集";
-
-
-    deleteButton.style.display =
-    "inline-block";
-
-
-    renderCurrentImage(
-        event.image
-    );
-
+    renderCurrentImage("");
 
     renderProgramEditors(
-        event.program || []
+        JSON.parse(
+            JSON.stringify(
+                event.program || []
+            )
+        )
     );
 
+    editorTitle.textContent =
+    "📄 催事を複製";
+
+    deleteButton.style.display =
+    "none";
 
     editorPanel.scrollIntoView({
         behavior:"smooth"
     });
 
-
 }
-
 
 
 // ==========================================
