@@ -450,6 +450,80 @@ function renderEventList(){
 // 編集
 // ==========================================
 
+function editEvent(id){
+
+    const event =
+    events.find(
+        item =>
+        String(item.id) ===
+        String(id)
+    );
+
+    if(!event){
+        return;
+    }
+
+    editingEventId =
+    event.id;
+
+    eventIdInput.value =
+    event.id || "";
+
+    titleInput.value =
+    event.title || "";
+
+    shortTitleInput.value =
+    event.shortTitle || "";
+
+    categoryInput.value =
+    event.category || "";
+
+    eventDateInput.value =
+    event.date || "";
+
+    eventColorInput.value =
+    event.color || "#247447";
+
+    startTimeInput.value =
+    event.startTime || "";
+
+    endTimeInput.value =
+    event.endTime || "";
+
+    zoomUrlInput.value =
+    event.zoomUrl || "";
+
+    currentImageInput.value =
+    event.image || "";
+
+    selectedImageFile = null;
+    removeCurrentImage = false;
+
+    editorTitle.textContent =
+    "✏️ 催事を編集";
+
+    deleteButton.style.display =
+    "inline-block";
+
+    renderCurrentImage(
+        event.image
+    );
+
+    renderProgramEditors(
+        event.program || []
+    );
+
+    editorPanel.scrollIntoView({
+    behavior:"smooth"
+});
+
+}
+
+
+// ==========================================
+// 複製
+// ==========================================
+
 function duplicateEvent(id){
 
     const event =
@@ -481,17 +555,20 @@ function duplicateEvent(id){
     eventColorInput.value =
     event.color || "#247447";
 
-    startTimeInput.value = "";
+    // 時間はコピーして残す
+    startTimeInput.value =
+    event.startTime || "";
 
-    endTimeInput.value = "";
+    endTimeInput.value =
+    event.endTime || "";
 
-    zoomUrlInput.value = "";
+// Zoom・画像だけ空
+zoomUrlInput.value = "";
+currentImageInput.value = "";
+imageFileInput.value = "";
 
-    currentImageInput.value = "";
-
-    selectedImageFile = null;
-
-    removeCurrentImage = false;
+selectedImageFile = null;
+removeCurrentImage = false;
 
     renderCurrentImage("");
 
@@ -510,8 +587,8 @@ function duplicateEvent(id){
     "none";
 
     editorPanel.scrollIntoView({
-        behavior:"smooth"
-    });
+    behavior:"smooth"
+});
 
 }
 
